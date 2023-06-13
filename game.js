@@ -65,6 +65,7 @@ const game = new Phaser.Game({
     },
     width: 1280,
     height: 720,
+    backgroundColor: "0x000000",
     physics: {
         default: 'arcade',
         arcade: {
@@ -72,5 +73,5 @@ const game = new Phaser.Game({
             gravity: {y: 2000}
         }
     },
-    scene: [ Level1 ]
+    scene: [MainMenu, Intro, Studio, Level1, OptionsMenu, Credits]
 });
