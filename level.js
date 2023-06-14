@@ -16,7 +16,7 @@ class LevelScene extends Phaser.Scene {
         this.load.glsl('bundle', 'assets/bundle.glsl.js');
     }
     create() {
-        this.input.addPointer();
+        this.input.addPointer(3);
         this.bgm = this.sound.add('bgm', {volume: 0});
         this.tweens.add({targets: this.bgm, volume: {from: 0, to: 0.2}, duration: 1000});
         this.bgm.loop = true;
