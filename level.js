@@ -58,28 +58,29 @@ class LevelScene extends Phaser.Scene {
 
         this.leftdown = false;
         this.rightdown = false;
+        this.updown = false;
         if (onMobile) {
             this.leftbut = this.add.sprite(100, 620, 'arrow')
                 .setInteractive()
                 .setAlpha(0.5)
-                .on('pointerdown', () => {this.leftdown = true; this.leftbut.setAlpha(1); this.rightbut.setRotation(1.5708)})
+                .on('pointerdown', () => {
+                    this.leftdown = true; this.leftbut.setAlpha(1); this.rightbut.x = -1280, this.upbut.x = 1180})
                 .on('pointerup', () => {
-                    this.time.delayedCall(400, () => {
-                        this.leftdown = false;
-                        this.leftbut.setAlpha(0.5);
-                        this.rightbut.setRotation(3.14159)
-                    });
-                });
+                    this.leftdown = false; this.leftbut.setAlpha(0.5); this.rightbutx = 1180, this.upbut.x = 2560});
             this.rightbut = this.add.sprite(1180, 620, 'arrow')
                 .setInteractive()
                 .setRotation(3.14159)
                 .setAlpha(0.5)
-                .on('pointerdown', () => {this.rightdown = true; this.rightbut.setAlpha(1); this.leftbut.setRotation(1.5708)})
-                .on('pointerup', () => {this.time.delayedCall(400, () => {
-                    this.rightdown = false;
-                    this.rightbut.setAlpha(0.5);
-                    this.leftbut.setRotation(0);
-                })});
+                .on('pointerdown', () => {
+                    this.rightdown = true; this.rightbut.setAlpha(1); this.leftbut.x = 2560, this.upbut.x = 100})
+                .on('pointerup', () => {
+                    this.rightdown = false; this.rightbut.setAlpha(0.5); this.leftbut.x = 100, this.upbut.x = 2560});
+            this.upbut = this.add.sprite(2560, 620, 'arrow')
+                .setInteractive()
+                .setRotation(1.5708)
+                .setAlpha(0.5)
+                .on('pointerdown', () => {this.updown = true; this.upbut.setAlpha(1)})
+                .on('pointerup', () => {this.updown = false; this.upbut.setAlpha(0.5)});
         }
 
         this.add.text(1230, 50, '📺', {fontSize: "25px"})
@@ -104,7 +105,7 @@ class LevelScene extends Phaser.Scene {
             this.player.setVelocityX(this.player.body.velocity.x * .8);
         }
 
-        if ((up.isDown || (this.leftdown && this.rightdown)) && this.player.body.touching.down && this.alive) {
+        if ((up.isDown || this.updown) && this.player.body.touching.down && this.alive) {
             this.move("jump")
         }
         // if (space.isDown && this.alive) {speedInc = 0; this.die()};
