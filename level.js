@@ -106,7 +106,9 @@ class LevelScene extends Phaser.Scene {
             this.player.setVelocityX(this.player.body.velocity.x + 40);
             if (onMobile) {this.player.setVelocityX(this.player.body.velocity.x + 20)}
         } else if (direction == "jump") {
-            this.player.setVelocityY(-400 - 0.6 * Math.abs(this.player.body.velocity.x));
+            let mc = 0;
+            if (onMobile) {mc = 0.5};
+            this.player.setVelocityY(-400 - (0.6 + mc) * Math.abs(this.player.body.velocity.x));
             this.beep.play();
         }
     }
