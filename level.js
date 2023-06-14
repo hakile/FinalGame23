@@ -63,27 +63,32 @@ class LevelScene extends Phaser.Scene {
                 .setInteractive()
                 .setAlpha(0.5)
                 .on('pointerdown', () => {
-                    this.leftdown = true; this.leftbut.setAlpha(1); this.rightbut.x = -1280, this.upbut.x = 1180})
+                    this.leftdown = true; this.leftbut.setAlpha(1); this.rightbut.x = -1280; this.upbut.x = 1180})
                 .on('pointerup', () => {
-                    this.leftdown = false; this.leftbut.setAlpha(0.5); this.rightbut.x = 1180, this.upbut.x = 2560})
+                    this.leftdown = false; this.leftbut.setAlpha(0.5); this.rightbut.x = 1180;
+                    this.upbut.x = 2560; this.updown = false; this.upbut.setAlpha(0.5)})
                 .on('pointerout', () => {
-                    this.leftdown = false; this.leftbut.setAlpha(0.5); this.rightbut.x = 1180, this.upbut.x = 2560});
+                    this.leftdown = false; this.leftbut.setAlpha(0.5); this.rightbut.x = 1180;
+                    this.upbut.x = 2560; this.updown = false; this.upbut.setAlpha(0.5)});
             this.rightbut = this.add.sprite(1180, 620, 'arrow')
                 .setInteractive()
                 .setRotation(3.14159)
                 .setAlpha(0.5)
                 .on('pointerdown', () => {
-                    this.rightdown = true; this.rightbut.setAlpha(1); this.leftbut.x = 2560, this.upbut.x = 100})
+                    this.rightdown = true; this.rightbut.setAlpha(1); this.leftbut.x = 2560; this.upbut.x = 100})
                 .on('pointerup', () => {
-                    this.rightdown = false; this.rightbut.setAlpha(0.5); this.leftbut.x = 100, this.upbut.x = 2560})
+                    this.rightdown = false; this.rightbut.setAlpha(0.5); this.leftbut.x = 100;
+                    this.upbut.x = 2560; this.updown = false; this.upbut.setAlpha(0.5)})
                 .on('pointerout', () => {
-                    this.rightdown = false; this.rightbut.setAlpha(0.5); this.leftbut.x = 100, this.upbut.x = 2560});
+                    this.rightdown = false; this.rightbut.setAlpha(0.5); this.leftbut.x = 100;
+                    this.upbut.x = 2560; this.updown = false; this.upbut.setAlpha(0.5)});
             this.upbut = this.add.sprite(2560, 620, 'arrow')
                 .setInteractive()
                 .setRotation(1.5708)
                 .setAlpha(0.5)
                 .on('pointerdown', () => {this.updown = true; this.upbut.setAlpha(1)})
-                .on('pointerup', () => {this.updown = false; this.upbut.setAlpha(0.5)});
+                .on('pointerup', () => {this.updown = false; this.upbut.setAlpha(0.5)})
+                .on('pointerout', () => {this.updown = false; this.upbut.setAlpha(0.5)});
         }
 
         this.add.text(1230, 50, '📺', {fontSize: "25px"})
