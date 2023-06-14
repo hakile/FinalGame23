@@ -36,7 +36,7 @@ class Intro extends Phaser.Scene {
         this.versionObject = this.add.text(
             this.game.config.width*.5, //x
             this.game.config.height*.7,//y
-            "1.0.24", //text
+            "1.0.26", //text
             {
                 font: `${this.game.config.height*.028}px Arial`,
                 color: "#ffffff",
