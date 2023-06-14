@@ -63,13 +63,23 @@ class LevelScene extends Phaser.Scene {
                 .setInteractive()
                 .setAlpha(0.5)
                 .on('pointerdown', () => {this.leftdown = true; this.leftbut.setAlpha(1); this.rightbut.setRotation(1.5708)})
-                .on('pointerup', () => {this.leftdown = false; this.leftbut.setAlpha(0.5); this.rightbut.setRotation(3.14159)});
+                .on('pointerup', () => {
+                    this.time.delayedCall(400, () => {
+                        this.leftdown = false;
+                        this.leftbut.setAlpha(0.5);
+                        this.rightbut.setRotation(3.14159)
+                    });
+                });
             this.rightbut = this.add.sprite(1180, 620, 'arrow')
                 .setInteractive()
                 .setRotation(3.14159)
                 .setAlpha(0.5)
                 .on('pointerdown', () => {this.rightdown = true; this.rightbut.setAlpha(1); this.leftbut.setRotation(1.5708)})
-                .on('pointerup', () => {this.rightdown = false; this.rightbut.setAlpha(0.5); this.leftbut.setRotation(0)});
+                .on('pointerup', () => {this.time.delayedCall(400, () => {
+                    this.rightdown = false;
+                    this.rightbut.setAlpha(0.5);
+                    this.leftbut.setRotation(0);
+                })});
         }
 
         this.add.text(1230, 50, '📺', {fontSize: "25px"})
