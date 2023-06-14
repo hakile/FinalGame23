@@ -71,6 +71,7 @@ const game = new Phaser.Game({
     },
     width: 1280,
     height: 720,
+    autoCenter: Phaser.Scale.CENTER_BOTH,
     backgroundColor: "0x000000",
     physics: {
         default: 'arcade',
@@ -79,5 +80,6 @@ const game = new Phaser.Game({
             gravity: {y: 2000}
         }
     },
+    activePointers: 3,
     scene: [Intro, Studio, MainMenu, Level1, OptionsMenu, Credits, WinScreen, LoseScreen]
 });
