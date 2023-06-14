@@ -33,6 +33,7 @@ class LevelScene extends Phaser.Scene {
         this.player = this.physics.add.sprite(0, 0, 'player');
         this.player.setCollideWorldBounds(true);
         this.player.body.setMaxVelocityX(600);
+        if (onMobile) {this.player.body.setMaxVelocityX(750)};
         this.player.setBounce(.25,0);
 
         this.enemies = [];
@@ -97,11 +98,13 @@ class LevelScene extends Phaser.Scene {
                 this.player.setVelocityX(this.player.body.velocity.x * .8)
             }
             this.player.setVelocityX(this.player.body.velocity.x - 40);
+            if (onMobile) {this.player.setVelocityX(this.player.body.velocity.x - 20)}
         } else if (direction == "right") {
             if (this.player.body.velocity.x < 0) {
                 this.player.setVelocityX(this.player.body.velocity.x * .8)
             }
             this.player.setVelocityX(this.player.body.velocity.x + 40);
+            if (onMobile) {this.player.setVelocityX(this.player.body.velocity.x + 20)}
         } else if (direction == "jump") {
             this.player.setVelocityY(-400 - 0.6 * Math.abs(this.player.body.velocity.x));
             this.beep.play();
