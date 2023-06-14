@@ -1,3 +1,8 @@
+var lives = 3;
+var loopsToBeat = 5;
+var speedInc = 0;
+var onMobile = false;
+
 class Intro extends Phaser.Scene {
     constructor() {
         super('intro');
@@ -28,8 +33,9 @@ class Intro extends Phaser.Scene {
             } //style
         ).setOrigin(.5);
 
+        window.addEventListener('touchstart', () => onMobile = true);
         this.input.once('pointerdown', function() {
-            this.scene.start("Studio")
+            this.time.delayedCall(250, () => this.scene.start("Studio"));
         }, this)
 
     }
@@ -50,7 +56,7 @@ class Studio extends Phaser.Scene {
         this.video.setScale(this.game.config.height/1080);
         this.video.play();
         this.time.addEvent({
-            delay: 6000*.125,
+            delay: 6000,
             callback: ()=>{
                 this.cameras.main.fade(250, 0,0,0);
                 this.time.delayedCall(250, () => this.scene.start("MainMenu"));
@@ -66,7 +72,6 @@ class MainMenu extends Phaser.Scene {
     }
     preload(){
         this.load.path = './assets/';
-        this.load.image('title', 'title.png');
         this.load.image('city', 'city.png');
         this.load.image('citylit', 'citylit.png');
 
@@ -74,6 +79,13 @@ class MainMenu extends Phaser.Scene {
     create(){
         this.timer = 0;
         this.cameras.main.fadeIn(500, 0,0,0); // fade in
+        this.add.text(1230, 50, '📺', {fontSize: "25px"})
+            .setInteractive()
+            .setOrigin(1,0)
+            .on('pointerdown', () => {
+                if (this.scale.isFullscreen) {this.scale.stopFullscreen()}
+                else {this.scale.startFullscreen()};
+            });
 
         //create image object 
         this.imageObject = this.add.sprite(
@@ -106,7 +118,12 @@ class MainMenu extends Phaser.Scene {
             .setPadding(this.game.config.height*.01389)
             .setStyle({ backgroundColor: '#111' })
             .setInteractive({ useHandCursor: true })
-            .on('pointerdown', () => { this.scene.start("level1"); })
+            .on('pointerdown', () => {
+                lives = 3;
+                loopsToBeat = 5;
+                speedInc = 0;
+                this.scene.start("level1");
+            })
             .on('pointerover', () => startButton.setStyle({ fill: '#f39c12' }))
             .on('pointerout', () => startButton.setStyle({ fill: '#FFF' }))
 

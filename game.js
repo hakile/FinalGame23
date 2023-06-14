@@ -1,5 +1,3 @@
-var speedInc = 0;
-
 class Enemy extends Phaser.Physics.Arcade.Sprite {
     constructor(scene, x, y, scale) {
         super(scene, x, y, scale);
@@ -17,7 +15,10 @@ class Level1 extends LevelScene {
         super("level1");
     }
     onEnter() {
-        this.add.text(30, 30, `Press Space to reset enemy speed\nEnemy speed: ${300+speedInc}`, {font: "32px Arial"}).setShadow(3,3);
+        // this.add.text(30, 30, `Press Space to reset enemy speed\nEnemy speed: ${300+speedInc}`, {font: "32px Arial"}).setShadow(3,3);
+        this.add.text(30, 30, `Lives: ${lives}`, {font: "32px Arial"}).setShadow(3,3);
+        if (loopsToBeat > 0) {this.add.text(30, 60, `Loops to complete: ${loopsToBeat}`, {font: "32px Arial"}).setShadow(3,3)}
+        else {this.add.text(30, 60, `Levels completed: ${5-loopsToBeat}`, {font: "32px Arial"}).setShadow(3,3)};
         
         this.player.x = 96;
         this.player.y = 621.5;
@@ -26,8 +27,10 @@ class Level1 extends LevelScene {
         this.enemy1 = new Enemy(this, 1200, 621.5, 1);
         this.enemies.push(this.enemy1);
         
-        this.enemy2 = new Enemy(this, 100, 306.65, 1.3);
-        this.enemies.push(this.enemy2);
+        if (loopsToBeat < 4) {
+            this.enemy2 = new Enemy(this, 100, 306.65, 1.3);
+            this.enemies.push(this.enemy2);
+        }
 
         this.time.delayedCall(50, () => {for (let i = 0; i < this.enemies.length; i++) {
                 this.enemies[i].setVelocityX(-(300+speedInc)/this.enemies[i].scaleX/this.enemies[i].scaleX)
@@ -42,9 +45,12 @@ class Level1 extends LevelScene {
         for (let i = 0; i < 4; i++) {platforms.create(64*i + 608, 256, 'tile')};
 
         platforms.create(640, 500, 'tile');
-        platforms.create(800, 104, 'tile');
-        platforms.create(800, 40, 'tile');
         platforms.create(1248, 192, 'tile');
+
+        if (loopsToBeat < 2) {
+            platforms.create(800, 104, 'tile');
+            platforms.create(800, 40, 'tile');            
+        }
 
         this.enemyBounds.push(this.physics.add.body(384, 342, 10, 10).setAllowGravity(false).setImmovable(true));
 
@@ -73,5 +79,5 @@ const game = new Phaser.Game({
             gravity: {y: 2000}
         }
     },
-    scene: [MainMenu, Intro, Studio, Level1, OptionsMenu, Credits]
+    scene: [Intro, Studio, MainMenu, Level1, OptionsMenu, Credits, WinScreen, LoseScreen]
 });
