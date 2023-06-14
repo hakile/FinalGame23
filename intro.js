@@ -52,6 +52,7 @@ class Studio extends Phaser.Scene {
     }
 
     create(){
+        if (onMobile) this.scene.start("MainMenu");
         this.video = this.add.video(this.game.config.width*.5, this.game.config.height*.5, 'Studio23');
         this.video.setScale(this.game.config.height/1080);
         this.video.play();

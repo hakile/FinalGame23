@@ -40,7 +40,6 @@ class LevelScene extends Phaser.Scene {
         this.player = this.physics.add.sprite(0, 0, 'player');
         this.player.setCollideWorldBounds(true);
         this.player.body.setMaxVelocityX(600);
-        if (onMobile) {this.player.body.setMaxVelocityX(750)};
         this.player.setBounce(.25,0);
 
         this.enemies = [];
@@ -66,7 +65,7 @@ class LevelScene extends Phaser.Scene {
                 .on('pointerdown', () => {
                     this.leftdown = true; this.leftbut.setAlpha(1); this.rightbut.x = -1280, this.upbut.x = 1180})
                 .on('pointerup', () => {
-                    this.leftdown = false; this.leftbut.setAlpha(0.5); this.rightbutx = 1180, this.upbut.x = 2560});
+                    this.leftdown = false; this.leftbut.setAlpha(0.5); this.rightbut.x = 1180, this.upbut.x = 2560});
             this.rightbut = this.add.sprite(1180, 620, 'arrow')
                 .setInteractive()
                 .setRotation(3.14159)
@@ -116,17 +115,13 @@ class LevelScene extends Phaser.Scene {
                 this.player.setVelocityX(this.player.body.velocity.x * .8)
             }
             this.player.setVelocityX(this.player.body.velocity.x - 40);
-            if (onMobile) {this.player.setVelocityX(this.player.body.velocity.x - 20)}
         } else if (direction == "right") {
             if (this.player.body.velocity.x < 0) {
                 this.player.setVelocityX(this.player.body.velocity.x * .8)
             }
             this.player.setVelocityX(this.player.body.velocity.x + 40);
-            if (onMobile) {this.player.setVelocityX(this.player.body.velocity.x + 20)}
         } else if (direction == "jump") {
-            let mc = 0;
-            if (onMobile) {mc = 0.5};
-            this.player.setVelocityY(-400 - (0.6 + mc) * Math.abs(this.player.body.velocity.x));
+            this.player.setVelocityY(-400 - 0.6 * Math.abs(this.player.body.velocity.x));
             this.beep.play();
         }
     }
