@@ -19,7 +19,11 @@ class Level1 extends LevelScene {
         this.add.text(30, 30, `Lives: ${lives}`, {font: "32px Arial"}).setShadow(3,3);
         if (loopsToBeat > 0) {this.add.text(30, 60, `Loops to complete: ${loopsToBeat}`, {font: "32px Arial"}).setShadow(3,3)}
         else {this.add.text(30, 60, `Levels completed: ${5-loopsToBeat}`, {font: "32px Arial"}).setShadow(3,3)};
-        
+        // new code
+        let tutorial = this.add.text(30, 90, `Use arrow keys to move`, {font: "32px Arial"}).setShadow(3,3);
+        //
+
+
         this.player.x = 96;
         this.player.y = 621.5;
 

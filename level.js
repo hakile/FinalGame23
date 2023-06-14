@@ -1,3 +1,5 @@
+var playMusic = true;
+
 class LevelScene extends Phaser.Scene {
     constructor(key) {
         super(key);
@@ -21,6 +23,11 @@ class LevelScene extends Phaser.Scene {
         this.tweens.add({targets: this.bgm, volume: {from: 0, to: 0.2}, duration: 1000});
         this.bgm.loop = true;
         this.bgm.play();
+        if (playMusic) {
+            this.bgm.play();
+        } else {
+            this.bgm.stop();
+        }
         
         this.beep = this.sound.add('beep', {volume: 0.5});
         this.ded = this.sound.add('death', {volume: 0.5});
