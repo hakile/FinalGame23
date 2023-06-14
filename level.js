@@ -66,7 +66,7 @@ class LevelScene extends Phaser.Scene {
                     this.leftdown = true; this.leftbut.setAlpha(1); this.rightbut.x = -1280, this.upbut.x = 1180})
                 .on('pointerup', () => {
                     this.leftdown = false; this.leftbut.setAlpha(0.5); this.rightbut.x = 1180, this.upbut.x = 2560})
-                .on('pointeroff', () => {
+                .on('pointerout', () => {
                     this.leftdown = false; this.leftbut.setAlpha(0.5); this.rightbut.x = 1180, this.upbut.x = 2560});
             this.rightbut = this.add.sprite(1180, 620, 'arrow')
                 .setInteractive()
@@ -76,7 +76,7 @@ class LevelScene extends Phaser.Scene {
                     this.rightdown = true; this.rightbut.setAlpha(1); this.leftbut.x = 2560, this.upbut.x = 100})
                 .on('pointerup', () => {
                     this.rightdown = false; this.rightbut.setAlpha(0.5); this.leftbut.x = 100, this.upbut.x = 2560})
-                .on('pointeroff', () => {
+                .on('pointerout', () => {
                     this.rightdown = false; this.rightbut.setAlpha(0.5); this.leftbut.x = 100, this.upbut.x = 2560});
             this.upbut = this.add.sprite(2560, 620, 'arrow')
                 .setInteractive()
