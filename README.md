@@ -12,5 +12,5 @@ Core Gameplay Protoype:  https://hakile.github.io/FinalGame23/core-gameplay-2Lin
 
 Selectable Requirements <br>
 
-Advanced visual assets: The background of our game is a video.
-Procedural graphics: The building lights on the menu screen.
+Advanced visual assets: Video intro of logo at the start of the game.
+Procedural graphics: There is a shader over the gameplay.
