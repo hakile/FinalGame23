@@ -33,6 +33,16 @@ class Intro extends Phaser.Scene {
             } //style
         ).setOrigin(.5);
 
+        this.versionObject = this.add.text(
+            this.game.config.width*.5, //x
+            this.game.config.height*.7,//y
+            "1.0.24", //text
+            {
+                font: `${this.game.config.height*.028}px Arial`,
+                color: "#ffffff",
+            } //style
+        ).setOrigin(.5);
+
         window.addEventListener('touchstart', () => onMobile = true);
         this.input.once('pointerdown', function() {
             this.time.delayedCall(250, () => this.scene.start("Studio"));
