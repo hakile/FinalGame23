@@ -163,6 +163,8 @@ class MainMenu extends Phaser.Scene {
     }
 }
 
+var musicOn = true;
+
 class OptionsMenu extends Phaser.Scene {
 
     constructor() {
@@ -175,14 +177,41 @@ class OptionsMenu extends Phaser.Scene {
     create(){
         //create text object
         this.textObject = this.add.text(
-            250, //x
-            300, //y
-            "Game Options Here", //text
+            this.game.config.width*.375, //x
+            this.game.config.width*.05, //y
+            "Game Options", //text
             {
                 font: "40px Arial",
                 color: "#ffffff",
             } //style
         );
+
+        let toggleMusic = this.add.text(this.game.config.width*.5, this.game.config.width*.25, 'Toggle Background Music', {
+            font: `${this.game.config.height*.04}px Verdana`})
+            .setOrigin(0.5)
+            .setPadding(10)
+            //.setStyle({ backgroundColor: '#168500' })
+            .setInteractive({ useHandCursor: true })
+            .on('pointerdown', () => { 
+                if (musicOn) {
+                    playMusic = false;
+                    musicOn = false;
+                    toggleMusic.setStyle({ backgroundColor: '#b80012' })
+                }else {
+                    playMusic = true;
+                    musicOn = true;
+                    toggleMusic.setStyle({ backgroundColor: '#168500' });
+                }
+                
+            })
+            .on('pointerover', () => toggleMusic.setStyle({ fill: '#f39c12' }))
+            .on('pointerout', () => toggleMusic.setStyle({ fill: '#FFF' }));
+
+        if (musicOn) {
+            toggleMusic.setStyle({ backgroundColor: '#168500' })
+        }else {
+            toggleMusic.setStyle({ backgroundColor: '#b80012' });
+        }
 
         let returnButton = this.add.text(this.game.config.width*.5, this.game.config.height*.82, 'Return', {
             font: `${this.game.config.height*.04}px Verdana`})
